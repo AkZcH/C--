@@ -11,7 +11,7 @@ struct ListNode* create(int val) {
 
 
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
-    struct ListNode result;           
+    struct ListNode result;          
     struct ListNode* pointer = &result;
     result.next = NULL;
 
