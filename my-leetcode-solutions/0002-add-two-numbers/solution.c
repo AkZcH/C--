@@ -40,9 +40,4 @@ int carry=0;
     }
 
     return result.next;
-
-
-
-
-
 }
