@@ -1,37 +1,41 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
-        // vector<int> tree;
+        if(root == NULL) return {};
 
-        // if(root== NULL){
-        //     return tree;
-        // } 
+        vector<int> tree;
+        // stack<TreeNode*> st;
 
-        // else{
-        //     tree.push_back(root->val);
-        //     vector<int> left = preorderTraversal(root->left);
-        //     vector<int> right = preorderTraversal(root->right);
+        // st.push(root);
+        // TreeNode* node = root;
 
-        //     tree.insert(tree.end(), left.begin(), left.end());
-        //     tree.insert(tree.end(), right.begin(), right.end());
+        // while(!st.empty()){
+        //     node = st.top();
+        //     st.pop();
+        //     tree.push_back(node->val);
+            
+        //     if(node->right) st.push(node->right);
+        //     if(node->left) st.push(node->left);
         // }
 
-        // return tree;
+        tree.push_back(root->val);
+        vector<int> left = preorderTraversal(root->left);
+        vector<int> right = preorderTraversal(root->right);
 
-        if(root==NULL) return {};
+        tree.insert(tree.end(), left.begin(), left.end());
+        tree.insert(tree.end(), right.begin(), right.end());
 
-        stack<TreeNode*> st;
-        vector<int> tree;
-
-        st.push(root);
-
-        while(!st.empty()){
-            TreeNode* node = st.top();
-            tree.push_back(node->val);
-            st.pop();
-            if(node->right) st.push(node->right);
-            if(node->left) st.push(node->left);
-        }
         return tree;
     }
 };
