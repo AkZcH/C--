@@ -16,14 +16,10 @@ public:
 
         int depth=0;
 
-        TreeNode* node = root;
-
-        int lh = maxDepth(node->left);
-        int lr = maxDepth(node->right);
+        int lh = maxDepth(root->left);
+        int lr = maxDepth(root->right);
         depth = 1 + max(lh, lr);
-
-
-
+        
         return depth;
     }
 };
