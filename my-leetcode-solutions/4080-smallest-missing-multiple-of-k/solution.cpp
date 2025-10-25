@@ -16,7 +16,5 @@ public:
             }
             multiple += k;
         }
-
-
     }
 };
