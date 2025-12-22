@@ -1,34 +1,43 @@
 class Solution {
 public:
 
-     int f(vector<int>& arr, int target, int index, vector<vector<int>> &dp){
-        if(target == 0) return 1;
-        if(index == 0) return (arr[0] == target);
+    bool f(int index, int target, vector<int> &nums){
+        int n = nums.size();
+        vector<bool> prev(target + 1, 0);
+        vector<bool> curr(target + 1, 0);
 
-        if(dp[index][target] != -1) return dp[index][target];
+        prev[0] = curr[0] = true;
+        if(nums[0]<=target) prev[nums[0]] = 0;
 
-        int notTake = f(arr, target, index-1, dp);
-        int take = 0;
-        if(arr[index] <= target) take = f(arr, target-arr[index], index-1, dp);
+        for(int i=1; i<n; i++){
+            for(int j = 1; j<=target; j++){
+                bool notTake = prev[j];
+                bool take = false;
 
-        return dp[index][target] = take || notTake;
-    }
+                if(j>=nums[i]){
+                take = prev[j - nums[i]];
+                }
 
-    bool isSum(vector<int>& arr, int target){
-        bool isSubSetSum = false;
-        int n = arr.size();
-        vector<vector<int>> dp(n, vector<int>(target+1, -1));
-        isSubSetSum = f(arr, target, n-1, dp) == 1 ? true:false;
-        return isSubSetSum;
+                curr[j] = take | notTake;
+            }
+            prev = curr;
+        }
+
+       
+        return prev[target];
     }
 
     bool canPartition(vector<int>& nums) {
         int n = nums.size();
-        int sum = 0;
-        for(int i=0; i<n; i++) sum += nums[i];
-        if(sum % 2== 1) return false;
-        int target=sum/2;
+        int sum =0;
+        for(int i=0; i<n; i++){
+            sum += nums[i];
+        }
 
-        return isSum(nums, target);
+        if(sum%2==1) return false;
+
+        else{
+            return f(n-1, sum/2, nums);
+        }
     }
 };
