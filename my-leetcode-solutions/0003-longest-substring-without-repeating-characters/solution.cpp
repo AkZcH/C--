@@ -1,18 +1,23 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        vector<int> lastSeen(256, -1); // Track last index of each character
-        int maxLength = 0;
-        int start = 0; // Start of current window
-        
-        for (int end = 0; end < s.size(); end++) {
-            // If character is found in current window, move start
-            if (lastSeen[s[end]] >= start) {
-                start = lastSeen[s[end]] + 1;
+        int n = s.size();
+        int start = 0;
+        int bestStart = 0;
+        int bestLen = 0;
+
+        vector<int> dict(256, -1);
+
+        for(int i=0; i<n; i++){
+            if(dict[s[i]] >= start){
+                start = dict[s[i]] + 1;
             }
-            lastSeen[s[end]] = end;
-            maxLength = max(maxLength, end - start + 1);
+            dict[s[i]] = i;
+
+            int windowLen = i - start + 1;
+            if(windowLen > bestLen) bestLen = windowLen;
         }
-        return maxLength;
+
+        return bestLen;
     }
 };
