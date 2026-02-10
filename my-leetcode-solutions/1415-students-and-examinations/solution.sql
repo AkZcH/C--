@@ -15,4 +15,3 @@ ORDER BY
     st.student_id,
     su.subject_name
 
-
