@@ -4,7 +4,7 @@
 #include<vector>
 using namespace std;
 
-    string shortestCommonSupersequence(string str1, string str2) {
+string shortestCommonSupersequence(string str1, string str2) {
         int m = str1.size();
         int n = str2.size();
         vector<vector<int>> dp(m+1, vector<int>(n+1, 0));
@@ -53,4 +53,4 @@ using namespace std;
             reverse(ans.begin(), ans.end());
 
         return ans;
-    }
+}
