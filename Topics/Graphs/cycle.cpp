@@ -22,7 +22,7 @@ bool isCycle(vector<vector<int>>graph, int v){
                     visited[i] = 1;
                     q.push({i, node});
                 }
-                else if(i != parent) return true; 
+                else if(i != parent) return true; //if i is already visited, and it is NOT the parent, means the current node didn't come from i. Then how is it visited? Because there is a cycle. so cycle is detected
 				else{
 					visited[i] = 1;
 					q.push({i, node});
