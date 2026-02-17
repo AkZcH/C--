@@ -16,6 +16,7 @@ public:
             auto [word, steps] = q.front();
             q.pop();
             if(word == endWord) return steps;
+            
             for(int i=0; i<word.size(); i++){
                 char original = word[i];
                 for(char c = 'a'; c<='z'; c++){
