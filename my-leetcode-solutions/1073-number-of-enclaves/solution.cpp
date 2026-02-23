@@ -27,10 +27,6 @@ public:
         vector<int> mc = {0, 0, -1, 1};
 
         while(!q.empty()){
-
-            int size = q.size();
-
-            for(int i=0; i<size; i++){
                 auto [r, c] = q.front();
                 q.pop();
                 for(int d=0; d<4; d++){
@@ -42,7 +38,6 @@ public:
                         q.push({nr, nc});
                     }
                 }
-            }
         }
 
         for(int i=0; i<rows; i++){
