@@ -40,11 +40,8 @@ public:
                     }
                 }
             }
-
             if(rotted) minutes++;
         }
-
-        return fresh == 0 ? minutes:-1;
-
+        return fresh == 0 ? minutes : -1;
     }
 };
