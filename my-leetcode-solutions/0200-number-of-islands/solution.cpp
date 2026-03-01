@@ -1,22 +1,26 @@
 class Solution {
 public:
     void floodFill(vector<vector<char>>& grid, queue<pair<int, int>>& q){
-        auto [i, j] = q.front();
-        q.pop();
+
         int rows = grid.size();
         int cols = grid[0].size();
         vector<int> mr = {-1, 1, 0, 0};
         vector<int> mc = {0, 0, -1, 1};
 
-        for(int d=0; d<4; d++){
-            int nr = i + mr[d];
-            int nc = j + mc[d];
+        while(!q.empty()){
+                    auto [i, j] = q.front();
+        q.pop();
+            for(int d=0; d<4; d++){
+                int nr = i + mr[d];
+                int nc = j + mc[d];
 
-            if(nr>=0 && nr<rows && nc>=0 && nc<cols && grid[nr][nc] == '1'){
-                q.push({nr, nc});
-                grid[nr][nc] = '0';
+                if(nr>=0 && nr<rows && nc>=0 && nc<cols && grid[nr][nc] == '1'){
+                    q.push({nr, nc});
+                    grid[nr][nc] = '0';
+                }
             }
         }
+        
     }
 
     int numIslands(vector<vector<char>>& grid) {
@@ -31,9 +35,7 @@ public:
                     islands++;
                     q.push({i, j});
                     grid[i][j] = '0';
-                    while(!q.empty()){
-                        floodFill(grid, q);
-                    }
+                    floodFill(grid, q);
                 }
             }
         }
