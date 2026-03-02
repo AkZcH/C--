@@ -1,39 +1,36 @@
 class Solution {
 public:
-    bool dfs(int v,  vector<vector<int>>& adj, vector<int>& visited, vector<int>& pathVisited){
-        visited[v] = 1;
-        pathVisited[v] = 1;
+    bool dfs(int node, vector<int>& visited, vector<int>& pathVisited, vector<vector<int>>& adj){
+        visited[node] = 1;
+        pathVisited[node] = 1;
 
-        for(auto it : adj[v]){
+        for(auto it : adj[node]){
             if(!visited[it]){
-                if(dfs(it, adj, visited, pathVisited)  == true) return true;
+                if(dfs(it, visited, pathVisited, adj) == true) return true;
             }
-            else if(pathVisited[it]){
-                return true;
-            }
+            else if(pathVisited[it]) return true;
         }
-        
-        pathVisited[v] = 0;
+        pathVisited[node] = 0;
         return false;
     }
 
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         int n = numCourses;
+        vector<vector<int>> adj(n);
+
+        for(auto i : prerequisites){
+            int u = i[0];
+            int v = i[1];
+
+            adj[v].push_back(u);
+        } 
+
         vector<int> visited(n, 0);
         vector<int> pathVisited(n, 0);
 
-        vector<vector<int>> adj(n);
-
-        for(auto p : prerequisites){
-            int course = p[0];
-            int prereq = p[1];
-
-            adj[course].push_back(prereq);
-        }
-
         for(int i=0; i<n; i++){
             if(!visited[i]){
-                if(dfs(i, adj, visited, pathVisited) == true) return false;
+                if(dfs(i, visited, pathVisited, adj) == true) return false;
             }
         }
         return true;
