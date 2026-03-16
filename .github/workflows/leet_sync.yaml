@@ -1,0 +1,20 @@
+# amananubhav.com | github.com/amanaanubhav
+name: Sync Leetcode
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Runs automatically every day at 11:55 PM IST (which is 6:25 PM UTC)
+    - cron: "25 18 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync
+        uses: joshcai/leetcode-sync@v1.7
+        with:
+          github-token: ${{ github.token }}
+          leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
+          leetcode-session: ${{ secrets.LEETCODE_SESSION }}
+          destination-folder: my-leetcode-solutions
